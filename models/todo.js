@@ -7,7 +7,7 @@ var Todo = mongoose.model('todo_mongoose', {
 		text : {
 			type : String,
 			require : true, //the value must exist
-			minlength : 1,
+			mlength : 1,
 			trim : true // eliminate the space of string
 		},
 		completed : {

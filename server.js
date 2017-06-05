@@ -32,6 +32,19 @@ app.post('/todo', (req, res) => {
 
 });
 
+app.get('/todo', (req, res) => {
+
+				Todo.find().then((response) => {
+					res.send({
+						resonse,
+						codeStatus : 400
+					});
+				}, (e) => {
+					es.status(400).send(e);
+				})
+
+});
+
 
 
 app.listen(3000, () => {
