@@ -45,6 +45,18 @@ app.get('/todo', (req, res) => {
 
 });
 
+app.get('/todo/:id', (req, res) => {
+
+				res.send(req.params);
+				var id = req.params.id;
+
+				//valid id using is valid 
+					
+
+});
+
+
+
 
 
 app.listen(3000, () => {
