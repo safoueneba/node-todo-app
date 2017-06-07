@@ -1,8 +1,6 @@
 var express = require('express');
+var ObjectId = require('./db/mongoose.js').ObjectId;
 var bodyParser = require('body-parser');
-
-
-
 var mongoose = require('./db/mongoose.js').mongoose;
 var Todo = require('./models/todo.js').Todo;
 var User = require('./models/user.js').User;
@@ -32,27 +30,39 @@ app.post('/todo', (req, res) => {
 
 });
 
-app.get('/todo', (req, res) => {
+// app.get('/todo', (req, res) => {
 
-				Todo.find().then((response) => {
-					res.send({
-						resonse,
-						codeStatus : 400
-					});
-				}, (e) => {
-					es.status(400).send(e);
-				})
+// 				Todo.find().then((response) => {
+// 					res.send({
+// 						resonse,
+// 						codeStatus : 400
+// 					});
+// 				}, (e) => {
+// 					res.status(400).send(e);
+// 				})
 
-});
+// });
 
 app.get('/todo/:id', (req, res) => {
 
-				res.send(req.params);
-				var id = req.params.id;
+				var _id = req.params.id;
 
-				//valid id using is valid 
-					
+				if(!mongoose.Types.ObjectId.isValid(_id)){
+					//console.log('unvalid id ')
+					return res.send('unvalid id');
+				}
 
+						Todo.findById(_id).then((todo) => {
+
+
+									res.send({
+										todo
+									});
+						}, (e) => {
+							res.status(400).send(e);
+						})
+
+			
 });
 
 

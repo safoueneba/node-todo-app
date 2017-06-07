@@ -4,8 +4,6 @@ var Todo = require('./../models/todo.js').Todo;
 
 
 
-
-
 		Todo.findById('5935cec01a31af048dd05b25').then((todo) =>{
 			//console.log(todo);
 			if(todo.reason === undefined){
