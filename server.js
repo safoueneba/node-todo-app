@@ -30,18 +30,18 @@ app.post('/todo', (req, res) => {
 
 });
 
-// app.get('/todo', (req, res) => {
+app.get('/todo', (req, res) => {
 
-// 				Todo.find().then((response) => {
-// 					res.send({
-// 						resonse,
-// 						codeStatus : 400
-// 					});
-// 				}, (e) => {
-// 					res.status(400).send(e);
-// 				})
+				Todo.find().then((response) => {
+					res.send({
+						resonse,
+						codeStatus : 400
+					});
+				}, (e) => {
+					res.status(400).send(e);
+				})
 
-// });
+});
 
 app.get('/todo/:id', (req, res) => {
 
@@ -63,6 +63,42 @@ app.get('/todo/:id', (req, res) => {
 						})
 
 			
+});
+
+app.delete('/todo/:id', (req, res) => {
+
+				var _id = req.params.id;
+
+				if(!mongoose.Types.ObjectId.isValid(_id)){
+					return res.status(400).send('unvalid id');
+				}
+
+						Todo.findByIdAndRemove(_id).then((todo) => {
+
+							if(todo !== null){
+
+								res.status(200).send({
+										message : 'this todo is deleted succesfully',
+										todo,
+									});
+
+							}
+
+							res.status(400).send({
+										message : 'todo not found'
+									});
+
+
+									
+						}, (e) => {
+							res.status(400).send(e);
+						})
+
+			
+}).catch((e) => {
+
+
+
 });
 
 
